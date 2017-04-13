@@ -1,5 +1,11 @@
-body{
+body, html{
     height: 100%;
+    width: 100%;
+}
+.listElement{
+    background-color: white;
+
+    padding: 5 5 5 5;
 }
 
 #map {
@@ -7,23 +13,25 @@ body{
     width: 100%;
 }
 
-#menu.hidden{
-    visibility: hidden;
+#menu{
+    margin-top: 15px;
 }
+
 .cityBox{
     background-color: white;
     border: 5px solid black;
 }
-#drawer {
-     width: 250px;
-     height: 100%;
-     background-color: grey;
-     opacity: 0.8;
-     position: absolute;
-     -ms-transform: translate(-300px, 0); /* IE 9 */
-     -webkit-transform: translate(-300px, 0); /* Safari */
 
-     transform: translate(-300px, 0);
+#drawer {
+     /*width: 250px;*/
+     height: 100%;
+     background-color: rgba(130, 128, 128, 0.7);
+
+     position: absolute;
+     -ms-transform: translate(-100%, 0); /* IE 9 */
+     -webkit-transform: translate(-100%, 0); /* Safari */
+
+     transform: translate(-100%, 0);
      transition: transform 0.3s ease;
      z-index:1;
 }
@@ -34,9 +42,30 @@ body{
      transform: translate (0,0);
 }
 
+#cityInfo {
+    /*width: 80%;*/
+    height: 100%;
+    background-color: rgba(74,94,180,0.8);
+
+    position: absolute;
+    -ms-transform: translate(125%, 0); /* IE 9 */
+    -webkit-transform: translate(125%, 0); /* Safari */
+
+    transform: translate(125%, 0);
+    transition: transform 0.3s ease;
+    z-index:1;
+}
+
+#cityInfo.open{
+
+    -ms-transform: translate(25%, 0); /* IE 9 */
+    -webkit-transform: translate(25%, 0); /* Safari */
+    transform: translate (25%, 0);
+}
 
 
-@media screen and (min-width: 600px){
+
+/*@media screen and (min-width: 600px){
      nav {
           position: relative;
           transform: translate(0,0);
@@ -46,4 +75,4 @@ body{
           display: flex;
           flex-flow: row nowrap;
      }
-}
+}*/
