@@ -10,7 +10,10 @@ body{
 #menu.hidden{
     visibility: hidden;
 }
-
+.cityBox{
+    background-color: white;
+    border: 5px solid black;
+}
 #drawer {
      width: 250px;
      height: 100%;

@@ -5,7 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neigborhood Knoop+-</title>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="CSS/style.css">
+
+
+
+
+
 
     </head>
 
@@ -13,30 +19,64 @@
 
 <!-- This is the burger menu (hidden until the burger is clicked) -->
 
-<nav id="drawer" class="dark_blue">
-
-    <form class="form">
-        <input type="text">
-    </form>
-</nav>
 
 
 
 
-<a id="menu">
+<!-- hamburger icon  -->
+<nav>
+    <a id="menu">
+<!-- <a id="menu" data-bind="click: burgerMenu"> -->
      <?xml version="1.0" ?><!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2 s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/></svg>
 </a>
+</nav>
+<!-- Das ist die Verhelts-Variante -->
+<input type="text" data-bind="autoComplete: { selected: selectedOption, options: options }" />
 
+<!-- Das ist die Niemeyer-Variante -->
+<!-- <input data-bind="jqAuto: { autoFocus: true }, jqAutoSource: myOptions, jqAutoValue: mySelectedOption, jqAutoSourceLabel: 'name', jqAutoSourceValue: 'id'" /> -->
+
+<!-- <hr/>
+
+<div data-bind="text: ko.toJSON(mySelectedOption)"></div> -->
+
+<!-- Debugging -->
+<!-- <p data-bind="text: selectedOption().object.name"></p> -->
+<!--
+<div data-bind="text: ko.toJSON(mySelectedOption)"></div>
+<section id="drawer" class="dark_blue">
+
+       <input data-bind="jqAuto: { autoFocus: true }, jqAutoSource: myOptions, jqAutoValue: mySelectedOption, jqAutoSourceLabel: 'name', jqAutoSourceValue: 'id'" />
+
+<hr/>
+
+<div data-bind="text: ko.toJSON(mySelectedOption)"></div> -->
+        <!-- <button class="button" data-bind="click: remove">Click me!</button> -->
+        <!-- <div data-bind="foreach: cityArray">
+            <div class="cityBox">
+               <h3 data-bind="text: city"></h3>
+               <p data-bind="text: country"></p>
+
+            </div> -->
+
+
+</section>
 
 
 <!-- this is the div for displaying the map -->
-<div id="map" class="main"></div>
+<div id="map" class="main">
+<!-- <div id="map" class="main" data-bind="click: menuOut"> -->
+</div>
 
 
+<!--
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=initMap"></script> -->
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=initMap"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="script/knockout.js"></script>
-<script src="script/script.js"></script>
+ <script src="script/scriptsave.js"></script>
 
 </body>
 </html>
