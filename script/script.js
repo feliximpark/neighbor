@@ -115,17 +115,27 @@ var viewModel = {
 
     burgerMenu: function(){
         console.log ("BurgerMenu gezündet");
-        menu.classList.toggle("hidden");
+        burger.classList.toggle("open");
         drawer.classList.toggle("open");
         mapShow=true;
 
     },
 
+    mouseTest: function(e){
+        console.log("mouseTest läuft");
+        var city = e.city;
+        viewModel.query(e.city);
+        viewModel.askAjax();
+
+
+    },
+
+
     menuOut: function(){
         console.log("Main is clicked");
         if (mapShow===true) {
         drawer.classList.remove("open");
-        menu.classList.remove("hidden");
+
         }
     },
 

@@ -42,25 +42,33 @@
 
 
 <nav class="row">
+    <div class="col-xs-3" >
+      <div id="burger" data-bind="click: burgerMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+    </div>
 
-<a class="col-xs-3" id="menu" col data-bind="click: burgerMenu">
-     <?xml version="1.0" ?><!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="32px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="32px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2 s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2 S29.104,22,28,22z"/></svg>
 </a>
-<h3 class="col-xs-9"> The Euro-City-Finder</h3>
+<h3 class="col-xs-8">Euro-City-Finder</h3>
 </nav>
 <div class="row">
 <nav id="drawer" class="dark_blue col-xs-6 col-md-3" >
-        <form action="#" class="row non-transparent">
-            <input class = "col-xs-10 non-transparent" type="search" name="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="on" />
-            <button class="col-xs-2 non-transparent" type="button" data-bind="click: askAjax">OK</button>
+        <form data-bind="submit: askAjax" class="row">
+            <input class = "col-xs-10" type="search" name="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
+            <button class="col-xs-2" type="button" data-bind="click: askAjax">OK</button>
         </form>
 
         <!-- <ul data-bind="template: {name: 'cities', foreach: $root.cityArray}"></ul> -->
         <div data-bind="template: {name: 'cities', foreach: cityArray}"></div>
 
 
-            <script type="text/html" id="cities" class="listElement">
-                <li class="row">
+            <script type="text/html" id="cities" class="listElement" >
+                <li class="row" data-bind="click: $parent.mouseTest">
                     <strong class="col-xs-12 listElement" data-bind="text: city"></strong>
                     <span class="col-xs-6 listElement" data-bind="text: country"></span>
                     <span class="col-xs-6 listElement" data-bind="text: population"></span>
