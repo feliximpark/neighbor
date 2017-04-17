@@ -1,6 +1,7 @@
 body, html{
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 /*BURGER-MENU (menu on the left)
@@ -109,12 +110,18 @@ the burger-menu-sign*/
 }
 
 
-
+.ajaxList:hover{
+    background-color: #A89DB6;
+}
 
 .listElement{
     background-color: white;
 
     padding: 5 5 5 5;
+}
+
+.listElement:hover{
+    background-color: #B3BAC1;
 }
 
 #map {
@@ -154,7 +161,8 @@ the burger-menu-sign*/
 #cityInfo {
     /*width: 80%;*/
     height: 100%;
-    background-color: rgba(74,94,180,0.8);
+    background-color: rgba(87,124,167,1.0);
+    overflow: scroll;
 
     position: absolute;
     -ms-transform: translate(125%, 0); /* IE 9 */

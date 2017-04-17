@@ -121,21 +121,45 @@ var viewModel = {
 
     },
 
-    mouseTest: function(e){
+    lookForcity: function(e){
         console.log("mouseTest läuft");
         var city = e.city;
         viewModel.query(e.city);
         viewModel.askAjax();
+    },
+
+    zoomToCity: function(e){
+        var position = e.location;
+        var choosenCity = e.city;
+        viewModel.zoomIn(position);
+        viewModel.askAjax(choosenCity);
 
 
     },
 
+    zoomToCityTextInput: function(){
+        var city = viewModel.cityArray()[0];
+        var position = city.location;
+        var choosenCity = city.city;
+        viewModel.zoomIn(position);
+        viewModel.askAjax(choosenCity);
+    },
+
+    zoomIn: function(position){
+
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(position);
+        map.fitBounds(bounds);
+        map.setZoom(13);
+
+    },
 
     menuOut: function(){
         console.log("Main is clicked");
         if (mapShow===true) {
         drawer.classList.remove("open");
-
+        cityInfo.classList.remove("open");
+        burger.classList.remove("open");
         }
     },
 
@@ -154,28 +178,38 @@ var viewModel = {
             if(cityList[index].city.toLowerCase().indexOf(value.toLowerCase()) >=0) {
                 console.log("jetzt soll gepusht werden");
                 viewModel.cityArray.push(cityList[index]);
+
             }
         }
         viewModel.setMarker();
     },
 
-    askAjax: function(){
+    askAjax: function(choosenCity){
         // TODO CHECK EINBAUEN, OB ETWAS EINGEGEBEN WURDE
-        var choosenCity = viewModel.query();
-        console.log(viewModel.query());
+        console.log (choosenCity);
+        // TODO Eventuell nach erstem Leerzeichen abbrechen, sonst kommt bei Wikipedia nichts heraus.
         nyTimes(choosenCity);
         wikipedia(choosenCity);
-        this.menuOut();
-        this.cityInfo();
+
+        viewModel.menuOut();
     },
 
     cityInfo: function(){
 
-        var cityData = this.nytData;
+
         console.log("cityInfo feuert");
         cityInfo.classList.toggle("open");
 
     },
+
+    highlightList: function(e){
+        console.log(e);
+    },
+
+    defaultList: function(){
+        listElement.classList.toggle("open");
+    },
+
 
     initMap: function(){
         map = new google.maps.Map(document.getElementById("map"), {
@@ -242,27 +276,32 @@ var viewModel = {
         // now pushing the marker into the markers array
         markers.push(marker);
 
-        // giving every marker a click-Eventhandler, that invokes the
-        // function populateInfowindow - creating an Infowindow
-        marker.addListener ("click", function(){
-            //wir übergeben mit this den einzelnen Marker und mit
-            // Infowindow die Variable mit der Funktion zur Schaffung
-            // eines Infowindows
-            populateInfowindow(this, infowindow);
-        });
+
 
 
         marker.addListener("mouseover", function(){
-
-             this.setIcon(highlightedIcon);
+            populateInfowindow(this, infowindow);
+            this.setIcon(highlightedIcon);
 
         });
 
         //Mouseout-Eventhandler
         marker.addListener ("mouseout", function(){
             this.setIcon(defaultIcon);
+
+            infowindow.setMap(null);
         });
 
+        marker.addListener("click", function(){
+            var choosenCity = marker.title;
+            var position = marker.position;
+            viewModel.zoomIn(position);
+            viewModel.askAjax(choosenCity);
+
+
+
+
+        });
 
 
 
@@ -302,56 +341,8 @@ function populateInfowindow(marker, infowindow){
                 return markerImage;
         }
 
-    // // function for creating the Markers. Function is called in the
-    // // for-Loop which is iterating over the locations-array
-    // function makeMarkerIcon(color){
-    //     var markerImage = new google.maps.MarkerImage(
-    //       "http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|"+ color +
-    //       "|40|_|%E2%80%A2",
-    //         new google.maps.Size(21, 34),
-    //         new google.maps.Point(0, 0),
-    //         new google.maps.Point(10, 34),
-    //         new google.maps.Size(21,34));
-    //     return markerImage;
-    // }
-
-
-
-    // // function to create the Infowindow
-    // // function is called in the for-loop iterating over the
-    // // locations-array
-    // function populateInfowindow(marker, infowindow){
-    //     //first checking if the window of the choosen marker is allready open
-    //     // if not, run the function
-    //     if (infowindow.marker != marker){
-    //         //hier schaffen wir den key marker und
-    //         //belegen ihn mit dem Wert marker
-    //         infowindow.marker = marker;
-    //         //Jetzt fülle ich das infowindow mit Text
-    //         infowindow.setContent ("<div>" + marker.title + "</div><br><div>"+marker.population+"</div>");
-    //         //dann öffne ich das Infowindow des Markers in der Map
-    //         infowindow.open(map, marker);
-    //         // dann setzen wir noch eine Closeclick-Function, um das
-    //         //Infowindow zu schließen. Das geht glaube ich auch ohne.
-    //         // infowindow.addListener("closeclick", function(){
-    //         //     console.log("closeklick pressed");
-    //         //     infowindow.marker = null;
-    //         // });
-    //     }
-
-    // }
-
-
-
-    // //     }
-    // // }
-
-    // // setMarkerWhileSearch: function(){
-    // //     var cities = viewModel.cityArray;
-
-    // }
-}
-}
+    }
+};
 viewModel.query.subscribe(viewModel.search);
 ko.applyBindings(viewModel);
 

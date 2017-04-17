@@ -23,15 +23,16 @@
 <body>
 <div class = "container-fluid">
 <div class="row">
+
 <section id="cityInfo" data-bind = "click: cityInfo" class="col-xs-10">
 <h1 class="col-xs-12">Das ist die CityInfo</h1>
 <div data-bind="template: {name: 'nytimes', foreach: nytData}"></div>
 <script type="text/html" id="nytimes">
-                <li class="row">
+                <li class="row ajaxList" data-bind="attr: {href: web_url">
                     <strong data-bind="text: headline.main" class=col-xs-12></strong>
                     <span data-bind="text: snippet" class=col-xs-12></span>
                     <!-- TODO VERLINKUNG MIT ARTIKEL -->
-                    <a data-bind="attr: {href: web_url}" class=col-xs-12>hallo hier ist der Link</a>
+                    <a data-bind="attr: {href: web_url}" class=col-xs-12>To the article</a>
                 </li>
             </script>
 </section>
@@ -58,20 +59,20 @@
 </nav>
 <div class="row">
 <nav id="drawer" class="dark_blue col-xs-6 col-md-3" >
-        <form data-bind="submit: askAjax" class="row">
-            <input class = "col-xs-10" type="search" name="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
-            <button class="col-xs-2" type="button" data-bind="click: askAjax">OK</button>
+        <form data-bind="submit: zoomToCityTextInput" class="row">
+            <input class = "col-xs-10" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
+            <button class="col-xs-2" type="button" data-bind="click: zoomToCityTextInput">OK</button>
         </form>
 
         <!-- <ul data-bind="template: {name: 'cities', foreach: $root.cityArray}"></ul> -->
         <div data-bind="template: {name: 'cities', foreach: cityArray}"></div>
 
 
-            <script type="text/html" id="cities" class="listElement" >
-                <li class="row" data-bind="click: $parent.mouseTest">
-                    <strong class="col-xs-12 listElement" data-bind="text: city"></strong>
-                    <span class="col-xs-6 listElement" data-bind="text: country"></span>
-                    <span class="col-xs-6 listElement" data-bind="text: population"></span>
+            <script type="text/html" id="cities">
+                <li class="row listElement" data-bind="click: $parent.zoomToCity">
+                    <strong class="col-xs-12" data-bind="text: city"></strong>
+                    <span class="col-xs-6" data-bind="text: country"></span>
+                    <span class="col-xs-6" data-bind="text: population"></span>
                 </li>
             </script>
 
