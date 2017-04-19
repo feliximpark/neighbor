@@ -1,7 +1,80 @@
 body, html{
     height: 100%;
     width: 100%;
+    margin: 0 5px 0 5px;
     overflow: hidden;
+}
+
+.vertical-text {
+    white-space: nowrap;
+    vertical-align: text-bottom;
+    /*writing-mode: tb-rl;*/
+    -ms-transform: rotate(270deg); /* IE 9 */
+    /*-ms-transform-origin: left top 0; /* IE 9 */*/
+    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+    /*-webkit-transform-origin: left top 0; /* Chrome, Safari, Opera */
+    transform: rotate(270deg);
+    /*transform-origin: left top 0;
+    z-index: 3;*/
+    /*float: left;*/
+}
+
+#green{
+    background-color: green;
+    height: 30%;
+    width: 10%;
+    position: absolute;
+    border-bottom-left-radius: 50px;
+
+    z-index:1;
+}
+#greatgreen{
+
+    background-color: green;
+    margin-left: 9%;
+    padding-left: 6%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+}
+
+
+#cityInfo {
+    width: 80%;
+    height: 100%;
+    background-color: rgba(87,124,167,0.0);
+    overflow: scroll;
+    top: 6%;
+
+
+    position: absolute;
+    -ms-transform: translate(115%, 0); /* IE 9 */
+    -webkit-transform: translate(115%, 0); /* Safari */
+
+    transform: translate(115%, 0);
+    transition: transform 0.3s ease;
+    z-index:1;
+}
+#cityBox{
+    position: static;
+    height: 100%;
+    background-color:blue;
+
+}
+#picture{
+    background-color: red;
+    height: 40%;
+    margin: 10%;
+    width: 70%;
+    z-index: 0;
+    position: absolute;
+}
+#cityInfo.open{
+
+    -ms-transform: translate(25%, 0); /* IE 9 */
+    -webkit-transform: translate(25%, 0); /* Safari */
+    transform: translate (25%, 0);
 }
 
 /*BURGER-MENU (menu on the left)
@@ -10,7 +83,7 @@ the burger-menu-sign*/
 
 #burger {
   width: 40px; /*60, 45*/
-  height: 80px;
+  height:12%;
   position: relative;
   margin: 15px 0 0 0;
   -webkit-transform: rotate(0deg);
@@ -156,28 +229,6 @@ the burger-menu-sign*/
     -ms-transform: translate(0,0); /* IE 9 */
      -webkit-transform: translate(0,0); /* Safari */
      transform: translate (0,0);
-}
-
-#cityInfo {
-    /*width: 80%;*/
-    height: 100%;
-    background-color: rgba(87,124,167,1.0);
-    overflow: scroll;
-
-    position: absolute;
-    -ms-transform: translate(125%, 0); /* IE 9 */
-    -webkit-transform: translate(125%, 0); /* Safari */
-
-    transform: translate(125%, 0);
-    transition: transform 0.3s ease;
-    z-index:1;
-}
-
-#cityInfo.open{
-
-    -ms-transform: translate(25%, 0); /* IE 9 */
-    -webkit-transform: translate(25%, 0); /* Safari */
-    transform: translate (25%, 0);
 }
 
 

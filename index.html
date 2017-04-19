@@ -21,13 +21,21 @@
     </head>
 
 <body>
-<div class = "container-fluid">
-<div class="row">
 
-<section id="cityInfo" data-bind = "click: cityInfo" class="col-xs-10">
-<h1 class="col-xs-12">Das ist die CityInfo</h1>
-<div data-bind="template: {name: 'nytimes', foreach: nytData}"></div>
-<script type="text/html" id="nytimes">
+<div id="container">
+    <section id="cityInfo" >
+    <div id="green" data-bind = "click: cityInfo" >
+        <h2 class="vertical-text">Hallo Text</h2>
+    </div>
+    <div id="greatgreen">
+        <article id="cityBox"><h2 data-bind="text: selectedCity"></h2>
+
+    <div>
+        <div id="picture"></div>
+    </div>
+
+    <div  data-bind="template: {name: 'nytimes', foreach: nytData}"></div>
+        <script type="text/html" id="nytimes">
                 <li class="row ajaxList" data-bind="attr: {href: web_url">
                     <strong data-bind="text: headline.main" class=col-xs-12></strong>
                     <span data-bind="text: snippet" class=col-xs-12></span>
@@ -35,8 +43,9 @@
                     <a data-bind="attr: {href: web_url}" class=col-xs-12>To the article</a>
                 </li>
             </script>
+            </article>
 </section>
-</div>
+
 <!-- This is the burger menu (hidden until the burger is clicked) -->
 
 <!-- hamburger icon  -->
@@ -88,7 +97,7 @@
 </div>
 
 </div>
-
+</div>
 <!-- Loading the google maps API -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap"></script>
 
@@ -97,6 +106,6 @@
 <script src="script/knockout.js"></script>
  <script src="script/script.js"></script>
 
-</div>
+
 </body>
 </html>

@@ -50,7 +50,10 @@ function nyTimes(choosenCity){
 
 // Ajax-call for Wikipedia
 function wikipedia(choosenCity){
-var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+choosenCity+"&format=json&callback=wikiCallback";
+    //looking for the strings before the first space, so that wikipedia looks up the city and not any further descriptions like "greater City"
+    var wikiCity = choosenCity.split([" "]);
+
+    var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+wikiCity[0]+"&format=json&callback=wikiCallback";
 
 //jsonp hat keine .false-Methode, die müssen wir uns selbst bauen
 //folgender Trick: Wir schreiben eine setTimeout-Function, eine Art Zeitzünder
@@ -105,6 +108,7 @@ var mapShow;
 var markers = [];
 var viewModel = {
 
+    selectedCity: ko.observable("Please select City!"),
     nytData: ko.observableArray(),
 
 
@@ -188,6 +192,7 @@ var viewModel = {
         // TODO CHECK EINBAUEN, OB ETWAS EINGEGEBEN WURDE
         console.log (choosenCity);
         // TODO Eventuell nach erstem Leerzeichen abbrechen, sonst kommt bei Wikipedia nichts heraus.
+        viewModel.selectedCity(choosenCity);
         nyTimes(choosenCity);
         wikipedia(choosenCity);
 
@@ -227,7 +232,10 @@ var viewModel = {
 
     setMarker: function(animeStyle){
         console.log(markers);
-        // clearing the map of the old marker
+        //creating a variable with the length of the actual
+        //marker-array for
+        //clearing the map of the old marker
+        var markersLength = markers.length;
         for (var i=0; i<markers.length; i++){
             markers[i].setMap(null);
         }
@@ -278,7 +286,6 @@ var viewModel = {
 
 
 
-
         marker.addListener("mouseover", function(){
             populateInfowindow(this, infowindow);
             this.setIcon(highlightedIcon);
@@ -292,16 +299,15 @@ var viewModel = {
             infowindow.setMap(null);
         });
 
-        marker.addListener("click", function(){
-            var choosenCity = marker.title;
-            var position = marker.position;
-            viewModel.zoomIn(position);
-            viewModel.askAjax(choosenCity);
-
-
-
-
-        });
+        //Using a closure in an IIFE for the click-Event to avoid that the eventhandler always calls the last value of "marker"
+        marker.addListener("click", (function(markercopy){
+            return function(){
+                var choosenCity = markercopy.title;
+                var position = markercopy.position;
+                viewModel.zoomIn(position);
+                viewModel.askAjax(choosenCity);
+            };
+        })(marker));
 
 
 
