@@ -53,7 +53,7 @@ function wikipedia(choosenCity){
     //looking for the strings before the first space, so that wikipedia looks up the city and not any further descriptions like "greater City"
     var wikiCity = choosenCity.split([" "]);
 
-    var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+wikiCity[0]+"&format=json&callback=wikiCallback";
+    var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+choosenCity+"&format=json&callback=wikiCallback";
 
 //jsonp hat keine .false-Methode, die müssen wir uns selbst bauen
 //folgender Trick: Wir schreiben eine setTimeout-Function, eine Art Zeitzünder
@@ -81,12 +81,12 @@ $.ajax({
         // daher iterieren wir über die Array, ziehen die Artikelnamen raus
         // und packen sie in eine URL, die wir dann auf die Seite zaubern
         var articleList = response[1];
-
+        console.log(response);
         for (var i=0; i<articleList.length; i++) {
             var articleStr = articleList[i];
             var newUrl = "http://en.wikipedia.org/wiki/" + articleStr;
             console.log(newUrl);
-            // $wikiElem.append("<li><a href='"+urrl+"'>" + articleStr + "</a></li>");
+            viewModel.wikiData.push(newUrl);
         }
         clearTimeout(wikiRequestTimeout);
     }
@@ -110,6 +110,7 @@ var viewModel = {
 
     selectedCity: ko.observable("Please select City!"),
     nytData: ko.observableArray(),
+    wikiData: ko.observableArray(),
 
 
     cityArray: ko.observableArray(cities),
@@ -188,10 +189,12 @@ var viewModel = {
         viewModel.setMarker();
     },
 
-    askAjax: function(choosenCity){
+    askAjax: function(city){
         // TODO CHECK EINBAUEN, OB ETWAS EINGEGEBEN WURDE
         console.log (choosenCity);
         // TODO Eventuell nach erstem Leerzeichen abbrechen, sonst kommt bei Wikipedia nichts heraus.
+        var cityParts = city.split([" "]);
+        var choosenCity = cityParts[0];
         viewModel.selectedCity(choosenCity);
         nyTimes(choosenCity);
         wikipedia(choosenCity);

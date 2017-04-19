@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neigborhood Knoop+-</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!--<script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'> -->
@@ -23,26 +23,40 @@
 <body>
 
 <div id="container">
+
+    <!-- The right sidebar with the infos from the ajax-calls -->
+
     <section id="cityInfo" >
-    <div id="green" data-bind = "click: cityInfo" >
-        <h2 class="vertical-text">Hallo Text</h2>
-    </div>
-    <div id="greatgreen">
-        <article id="cityBox"><h2 data-bind="text: selectedCity"></h2>
+        <div id="green" data-bind = "click: cityInfo" >
+            <h2 class="vertical-text">Hallo Text</h2>
+        </div>
 
-    <div>
-        <div id="picture"></div>
-    </div>
+        <article id="greatgreen">
+            <h2 class="border underlay" data-bind="text: selectedCity"></h2>
+            <img id="picture" src="http://placehold.it/350x150">
+            <h3 class="border underlay">Latest NY-Times-articles</h3>
+            <div class="articleBox" data-bind="foreach: nytData">
 
-    <div  data-bind="template: {name: 'nytimes', foreach: nytData}"></div>
-        <script type="text/html" id="nytimes">
-                <li class="row ajaxList" data-bind="attr: {href: web_url">
-                    <strong data-bind="text: headline.main" class=col-xs-12></strong>
-                    <span data-bind="text: snippet" class=col-xs-12></span>
-                    <!-- TODO VERLINKUNG MIT ARTIKEL -->
-                    <a data-bind="attr: {href: web_url}" class=col-xs-12>To the article</a>
-                </li>
+           <!--  <div data-bind="template: {name: 'nytimes', foreach: nytData}"></div>
+            <script type="text/html" id="nytimes"> -->
+
+                <div class="hover text-left text-center">
+                    <a data-bind="attr: {href: web_url}" >
+                    <h4 data-bind="text: headline.main"></h4>
+                    </a>
+                    <hr>
+                </div>
+            </div>
+            <h3 class="border underlay">Best wikipedia-articles</h3>
+            <div class="articleBox" data-bind="foreach: wikiData">
             </script>
+
+        <article>
+
+    </div>
+
+
+
             </article>
 </section>
 
@@ -52,7 +66,7 @@
 
 
 <nav class="row">
-    <div class="col-xs-3" >
+    <div class="col-xs-2" >
       <div id="burger" data-bind="click: burgerMenu">
           <span></span>
           <span></span>
@@ -64,25 +78,28 @@
     </div>
 
 </a>
-<h3 class="col-xs-8">Euro-City-Finder</h3>
+<h3 class="col-xs-10 headline">Euro-City-Finder</h3>
 </nav>
 <div class="row">
-<nav id="drawer" class="dark_blue col-xs-6 col-md-3" >
-        <form data-bind="submit: zoomToCityTextInput" class="row">
-            <input class = "col-xs-10" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
-            <button class="col-xs-2" type="button" data-bind="click: zoomToCityTextInput">OK</button>
-        </form>
-
+<nav id="drawer" class="dark_blue col-xs-10 col-md-3" >
+<br>
+    <form data-bind="submit: zoomToCityTextInput" class="row">
+        <input class ="col-xs-9 underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
+        <button class="underlay col-xs-2 padding" type="button" data-bind="click: zoomToCityTextInput">OK</button>
+    </form>
+        <br>
         <!-- <ul data-bind="template: {name: 'cities', foreach: $root.cityArray}"></ul> -->
         <div data-bind="template: {name: 'cities', foreach: cityArray}"></div>
 
 
             <script type="text/html" id="cities">
-                <li class="row listElement" data-bind="click: $parent.zoomToCity">
-                    <strong class="col-xs-12" data-bind="text: city"></strong>
-                    <span class="col-xs-6" data-bind="text: country"></span>
-                    <span class="col-xs-6" data-bind="text: population"></span>
-                </li>
+                <div class="row listElement" data-bind="click: $parent.zoomToCity">
+                    <strong class="col-xs-8" data-bind="text: city"></strong>
+                    <strong class="col-xs-4">Pop.:</strong>
+                    <span class="col-xs-8" data-bind="text: country"></span>
+                    <span class="col-xs-4" data-bind="text: population"></span>
+
+                </div>
             </script>
 
 </nav>

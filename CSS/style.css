@@ -3,8 +3,11 @@ body, html{
     width: 100%;
     margin: 0 5px 0 5px;
     overflow: hidden;
+    box-sizing: border-box
 }
-
+.padding{
+  margin: 5px;
+}
 .vertical-text {
     white-space: nowrap;
     vertical-align: text-bottom;
@@ -20,27 +23,70 @@ body, html{
 }
 
 #green{
-    background-color: green;
+    background-color: #23538A;
     height: 30%;
-    width: 10%;
+    width: 11%;
     position: absolute;
     border-bottom-left-radius: 50px;
-
     z-index:1;
 }
+.headline{
+  font-family: 'Shrikhand', cursive;
+  font-size:1.8em;
+}
+
+
 #greatgreen{
 
-    background-color: green;
-    margin-left: 9%;
-    padding-left: 6%;
+  -webkit-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
+box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
+  /*display:flex;*/
+
+    margin-left:10%;
+    /*background-color: green;*/
+    background: rgb(35,83,138); /* Old browsers */
+background: -moz-linear-gradient(-45deg, rgba(35,83,138,1) 29%, rgba(122,193,221,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(35,83,138,1) 29%,rgba(122,193,221,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(35,83,138,1) 29%,rgba(122,193,221,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23538a', endColorstr='#7ac1dd',GradientType=1 );
+    padding: 0 40px 0 40px;
+    text-align: center;
     position: absolute;
     height: 100%;
     width: 100%;
 
 }
 
+.hover:hover{
+  background-color: white;
+  border-radius: 20px;
+}
+
+a{
+  color: black;
+}
+.articleBox{
+  height: 30%;
+  overflow: auto;
+  border-radius: 50px;
+  padding: 7px;
+  background-color: #A3CCFF;
+}
+.underlay{
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 5px;
+}
+.text-center{
+  padding: 10px 5px 0 5px;
+
+}
+
 
 #cityInfo {
+
     width: 80%;
     height: 100%;
     background-color: rgba(87,124,167,0.0);
@@ -56,19 +102,28 @@ body, html{
     transition: transform 0.3s ease;
     z-index:1;
 }
+.border{
+  border: 2px solid black;
+}
+.text-left{
+  text-align: left;
+}
 #cityBox{
+
     position: static;
     height: 100%;
     background-color:blue;
+    padding-left: 5px;
 
 }
 #picture{
+    margin: 5% auto 0 auto;
+
     background-color: red;
-    height: 40%;
-    margin: 10%;
-    width: 70%;
+    height: auto;
+
+    width: 80%;
     z-index: 0;
-    position: absolute;
 }
 #cityInfo.open{
 
@@ -83,9 +138,9 @@ the burger-menu-sign*/
 
 #burger {
   width: 40px; /*60, 45*/
-  height:12%;
+  height: 48px;
   position: relative;
-  margin: 15px 0 0 0;
+  margin: 20px 0 0 0;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -189,8 +244,9 @@ the burger-menu-sign*/
 
 .listElement{
     background-color: white;
-
-    padding: 5 5 5 5;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    /*padding: 5px 5px 5px 5px;*/
 }
 
 .listElement:hover{
@@ -212,7 +268,12 @@ the burger-menu-sign*/
 }
 
 #drawer {
-     /*width: 250px;*/
+
+
+     -webkit-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
+box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
+
      height: 100%;
      background-color: rgba(130, 128, 128, 0.7);
 
@@ -223,6 +284,7 @@ the burger-menu-sign*/
      transform: translate(-100%, 0);
      transition: transform 0.3s ease;
      z-index:1;
+
 }
 
 #drawer.open {
