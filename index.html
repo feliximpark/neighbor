@@ -7,121 +7,118 @@
     <title>Neigborhood Knoop+-</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <!--<script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'> -->
-    </script>
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="CSS/style.css">
-
-
-
-
-
-
-    </head>
+</head>
 
 <body>
 
-<div id="container">
+
+ <header id="headline">
+
+            <div id="burger" data-bind="click: burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+
+        <h3 class="headline">Euro-City-Finder</h3>
+    </header>
+
 
     <!-- The right sidebar with the infos from the ajax-calls -->
 
-    <section id="cityInfo" >
-        <div id="green" data-bind = "click: cityInfo" >
-            <h2 class="vertical-text">Hallo Text</h2>
+    <aside id="cityInfo">
+        <!-- the div-section for the handler on the left of the infobar
+        this handler we can click for showing the right sidebar -->
+        <div id="smallHandler" data-bind="click: cityInfo" >
+            <h2 class="vertical-text">MORE CITY-INFOS</h2>
         </div>
 
-        <article id="greatgreen">
-            <h2 class="border underlay" data-bind="text: selectedCity"></h2>
-            <img id="picture" src="http://placehold.it/350x150">
-            <h3 class="border underlay">Latest NY-Times-articles</h3>
+        <article id="infoBar">
+            <h2 class="border underlay" data-bind="text: selectedCity"></h2><br>
+            <!-- <img id="picture" data-bind="attr: {src:cityPicture}" alt="Picture of the choosen City"> -->
+            <!-- <img id="picture" src="http://maps.googleapis.com/maps/api/streetview?size=600x300&location=london" alt="London"> -->
+            <h4 class="border underlay">NY-Times-articles</h4>
             <div class="articleBox" data-bind="foreach: nytData">
-
-           <!--  <div data-bind="template: {name: 'nytimes', foreach: nytData}"></div>
-            <script type="text/html" id="nytimes"> -->
-
                 <div class="hover text-left text-center">
                     <a data-bind="attr: {href: web_url}" >
                     <h4 data-bind="text: headline.main"></h4>
                     </a>
                     <hr>
                 </div>
-            </div>
-            <h3 class="border underlay">Best wikipedia-articles</h3>
+            </div><br>
+            <h4 class="border underlay">wikipedia</h4>
             <div class="articleBox" data-bind="foreach: wikiData">
-            </script>
-
-        <article>
-
-    </div>
-
-
-
-            </article>
-</section>
-
-<!-- This is the burger menu (hidden until the burger is clicked) -->
-
-<!-- hamburger icon  -->
-
-
-<nav class="row">
-    <div class="col-xs-2" >
-      <div id="burger" data-bind="click: burgerMenu">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-      </div>
-    </div>
-
-</a>
-<h3 class="col-xs-10 headline">Euro-City-Finder</h3>
-</nav>
-<div class="row">
-<nav id="drawer" class="dark_blue col-xs-10 col-md-3" >
-<br>
-    <form data-bind="submit: zoomToCityTextInput" class="row">
-        <input class ="col-xs-9 underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
-        <button class="underlay col-xs-2 padding" type="button" data-bind="click: zoomToCityTextInput">OK</button>
-    </form>
-        <br>
-        <!-- <ul data-bind="template: {name: 'cities', foreach: $root.cityArray}"></ul> -->
-        <div data-bind="template: {name: 'cities', foreach: cityArray}"></div>
-
-
-            <script type="text/html" id="cities">
-                <div class="row listElement" data-bind="click: $parent.zoomToCity">
-                    <strong class="col-xs-8" data-bind="text: city"></strong>
-                    <strong class="col-xs-4">Pop.:</strong>
-                    <span class="col-xs-8" data-bind="text: country"></span>
-                    <span class="col-xs-4" data-bind="text: population"></span>
-
+                <div class="hover text-left text-center">
+                    <a data-bind="attr: {href: url}" >
+                    <h4 data-bind="text: title"></h4>
+                    </a>
+                    <hr>
                 </div>
-            </script>
+            </div>
 
-</nav>
-</div>
-
-
+        </article>
+    </aside>
 
 
-<!-- this is the div for displaying the map -->
-<div id="map" class="main col-xs-12" data-bind="click: menuOut">
-<!-- <div id="map" class="main" data-bind="click: menuOut"> -->
-</div>
 
-</div>
-</div>
+
+
+
+    <!-- This is the burger menu (hidden until the burger is clicked) -->
+
+    <!-- hamburger icon  -->
+
+
+
+
+
+
+
+    <!-- Left sidebar -->
+    <nav id="drawer">
+        <form data-bind="submit: zoomToCityTextInput">
+            <input class ="input underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
+            <button class="underlay padding" type="button" data-bind="click: zoomToCityTextInput">OK</button>
+        </form>
+        <br>
+        <div class="cities" data-bind="foreach: cityArray">
+            <div class="listElement" data-bind="click: $parent.zoomToCity">
+                <strong data-bind="text: city"></strong>
+                <strong class="text-right">Pop.</strong><br>
+                <span data-bind="text: country"></span>
+                <span class="text-right" data-bind="text: population"></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+    <!-- this is the div for displaying the map -->
+    <main>
+    <div id="map" class="col-xs-12" data-bind="click: menuOut">
+    <!-- <div id="map" class="main" data-bind="click: menuOut"> -->
+    </div>
+    </main>
+
+
+
+
+
 <!-- Loading the google maps API -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap"></script>
 
 
 
 <script src="script/knockout.js"></script>
- <script src="script/script.js"></script>
+<script src="script/script.js"></script>
 
 
 </body>

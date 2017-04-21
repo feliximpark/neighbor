@@ -3,8 +3,9 @@
 //Storage for the datasets and the AJAX-calls
 
 // var cities = source for the initial observable Array
-var cities =
-[{city:"Istanbul",population:9897599,country:"Turkey",class:6,countrycode:"TR",location:{lat:41.0082376,lng:28.97835889999999}},{city:"London (greater city)",population:8256400,country:"United Kingdom",class:6,countrycode:"UK",location:{lat:51.504827,lng:-0.0786263999999619}},{city:"Paris (greater city)",population:6695233,country:"France",class:6,countrycode:"FR",location:{lat:48.8627013,lng:2.288661700000034}}];
+var cities=[{city:"Istanbul",population:9897599,country:"Turkey",class:6,countrycode:"TR",location:{lat:41.0082376,lng:28.97835889999999}},{city:"London (greater city)",population:8256400,country:"United Kingdom",class:6,countrycode:"UK",location:{lat:51.504827,lng:-0.0786263999999619}},{city:"Paris (greater city)",population:6695233,country:"France",class:6,countrycode:"FR",location:{lat:48.8627013,lng:2.288661700000034}}];
+
+
 
 // Creating an Array with all names for the autocomplete
 // TO DO: ein Array clonen, nicht nur auf das Original verweisen,
@@ -20,6 +21,11 @@ function createCityList(){
     }
 }
 createCityList();
+
+
+// Call for
+
+
 
 
 //AJAX-Calls
@@ -48,12 +54,15 @@ function nyTimes(choosenCity){
 }
 
 
+
+
+
 // Ajax-call for Wikipedia
 function wikipedia(choosenCity){
     //looking for the strings before the first space, so that wikipedia looks up the city and not any further descriptions like "greater City"
     var wikiCity = choosenCity.split([" "]);
-
-    var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+choosenCity+"&format=json&callback=wikiCallback";
+    console.log(wikiCity);
+    var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+wikiCity+"&format=json&callback=wikiCallback";
 
 //jsonp hat keine .false-Methode, die müssen wir uns selbst bauen
 //folgender Trick: Wir schreiben eine setTimeout-Function, eine Art Zeitzünder
@@ -81,13 +90,20 @@ $.ajax({
         // daher iterieren wir über die Array, ziehen die Artikelnamen raus
         // und packen sie in eine URL, die wir dann auf die Seite zaubern
         var articleList = response[1];
+        var newArray = [
+        ];
+        viewModel.wikiData.removeAll();
         console.log(response);
         for (var i=0; i<articleList.length; i++) {
-            var articleStr = articleList[i];
+            var articleStr = articleList[i].replace(/ /gi, "_");
             var newUrl = "http://en.wikipedia.org/wiki/" + articleStr;
-            console.log(newUrl);
-            viewModel.wikiData.push(newUrl);
+            newArray.title = articleList[i];
+            newArray.url = newUrl;
+            viewModel.wikiData.push(newArray);
+
+
         }
+
         clearTimeout(wikiRequestTimeout);
     }
 });
@@ -96,8 +112,16 @@ $.ajax({
 
 
 
-
     return false;
+}
+
+
+
+function streetView(choosenCity){
+    var address = choosenCity;
+    var streetViewUrl = "http://maps.googleapis.com/maps/api/streetview?size=600x300&location=" + address;
+    viewModel.cityPicture(streetViewUrl);
+
 }
 
 
@@ -111,6 +135,7 @@ var viewModel = {
     selectedCity: ko.observable("Please select City!"),
     nytData: ko.observableArray(),
     wikiData: ko.observableArray(),
+    cityPicture: ko.observable(""),
 
 
     cityArray: ko.observableArray(cities),
@@ -191,13 +216,14 @@ var viewModel = {
 
     askAjax: function(city){
         // TODO CHECK EINBAUEN, OB ETWAS EINGEGEBEN WURDE
-        console.log (choosenCity);
+        console.log ("Ask Ajax abgefeuert");
         // TODO Eventuell nach erstem Leerzeichen abbrechen, sonst kommt bei Wikipedia nichts heraus.
         var cityParts = city.split([" "]);
         var choosenCity = cityParts[0];
         viewModel.selectedCity(choosenCity);
         nyTimes(choosenCity);
         wikipedia(choosenCity);
+        streetView(choosenCity);
 
         viewModel.menuOut();
     },
@@ -289,18 +315,25 @@ var viewModel = {
 
 
 
-        marker.addListener("mouseover", function(){
-            populateInfowindow(this, infowindow);
-            this.setIcon(highlightedIcon);
-
-        });
+        marker.addListener("mouseover", (function(markercopy){
+            return function(){
+                populateInfowindow(markercopy, infowindow);
+                markercopy.setIcon(highlightedIcon);
+            };
+        })(marker));
 
         //Mouseout-Eventhandler
-        marker.addListener ("mouseout", function(){
-            this.setIcon(defaultIcon);
+        marker.addListener ("mouseout", (function(markercopy){
+            return function(){
+                markercopy.setIcon(defaultIcon);
+                infowindow.setMap(null);
+            };
+        })(marker));
+        // marker.addListener ("mouseout", function(){
+        //     this.setIcon(defaultIcon);
 
-            infowindow.setMap(null);
-        });
+        //     infowindow.setMap(null);
+        // });
 
         //Using a closure in an IIFE for the click-Event to avoid that the eventhandler always calls the last value of "marker"
         marker.addListener("click", (function(markercopy){

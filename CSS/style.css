@@ -1,71 +1,133 @@
 body, html{
-    height: 100%;
-    width: 100%;
-    margin: 0 5px 0 5px;
-    overflow: hidden;
-    box-sizing: border-box
+  /*height: 100%;
+  width: 100%;*/
+  /*overflow: hidden;*/
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+
+
+
+
+
+/*Main screen*/
+#map {
+    height: 93%;
+    top: 7%;
+    position: absolute;
+
+}
+
+#menu{
+    margin-top: 15px;
+}
+
+
+
+
+
+/*General styles*/
 .padding{
   margin: 5px;
 }
-.vertical-text {
-    white-space: nowrap;
-    vertical-align: text-bottom;
-    /*writing-mode: tb-rl;*/
-    -ms-transform: rotate(270deg); /* IE 9 */
-    /*-ms-transform-origin: left top 0; /* IE 9 */*/
-    -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
-    /*-webkit-transform-origin: left top 0; /* Chrome, Safari, Opera */
-    transform: rotate(270deg);
-    /*transform-origin: left top 0;
-    z-index: 3;*/
-    /*float: left;*/
-}
 
-#green{
-    background-color: #23538A;
-    height: 30%;
-    width: 11%;
-    position: absolute;
-    border-bottom-left-radius: 50px;
-    z-index:1;
-}
-.headline{
-  font-family: 'Shrikhand', cursive;
-  font-size:1.8em;
-}
-
-
-#greatgreen{
-
-  -webkit-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
--moz-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
-  /*display:flex;*/
-
-    margin-left:10%;
-    /*background-color: green;*/
-    background: rgb(35,83,138); /* Old browsers */
-background: -moz-linear-gradient(-45deg, rgba(35,83,138,1) 29%, rgba(122,193,221,1) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(-45deg, rgba(35,83,138,1) 29%,rgba(122,193,221,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(135deg, rgba(35,83,138,1) 29%,rgba(122,193,221,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23538a', endColorstr='#7ac1dd',GradientType=1 );
-    padding: 0 40px 0 40px;
-    text-align: center;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-
-}
 
 .hover:hover{
   background-color: white;
   border-radius: 20px;
 }
 
+
 a{
   color: black;
 }
+
+.border{
+  border: 2px solid black;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.text-right{
+  float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*Sidebar on the right*/
+#cityInfo{
+  height: 93%;
+  width: 80%;
+  background-color: rgba(87,124,167,0.0);
+  /*overflow: scroll;*/
+  top: 7%;
+  position: absolute;
+  -ms-transform: translate(114%, 0); /* IE 9 */
+  -webkit-transform: translate(114%, 0); /* Safari */
+  transform: translate(114%, 0);
+  transition: transform 0.3s ease;
+  z-index:1;
+}
+
+#cityInfo.open{
+  -ms-transform: translate(25%, 0); /* IE 9 */
+  -webkit-transform: translate(25%, 0); /* Safari */
+  transform: translate(25%, 0);
+}
+
+#smallHandler{
+  background-color: #23538A;
+  height: 45%;
+  width: 12%;
+  position: absolute;
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 50px;
+  z-index:1;
+
+}
+
+.vertical-text{
+  /*white-space: nowrap;*/
+  margin:0;
+  padding-right: 0px;
+  color: white;
+  writing-mode: tb-rl;
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+  margin-top: 20px;
+ /* transform-origin: left center 0;*/
+}
+
+#infoBar{
+  -webkit-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
+  box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
+  margin-left: 12%;
+  padding:0 10% 0 10%;
+  background: rgb(35,83,138); /* Old browsers */
+  background: -moz-linear-gradient(-45deg, rgba(35,83,138,1) 31%, rgba(167,207,223,1) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, rgba(35,83,138,1) 31%,rgba(167,207,223,1) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, rgba(35,83,138,1) 31%,rgba(167,207,223,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#23538a', endColorstr='#a7cfdf',GradientType=1 );
+  text-align: center;
+  position: absolute;
+  height: 100%;
+  width: 90%;
+}
+
 .articleBox{
   height: 30%;
   overflow: auto;
@@ -73,74 +135,139 @@ a{
   padding: 7px;
   background-color: #A3CCFF;
 }
+
 .underlay{
   background-color: white;
   border: 2px solid black;
   border-radius: 20px;
   padding: 5px;
 }
+
+#picture{
+    margin: 5% auto 0 auto;
+
+
+    height: auto;
+
+    width: 80%;
+    z-index: 1;
+}
+
 .text-center{
   padding: 10px 5px 0 5px;
 
 }
 
 
-#cityInfo {
-
-    width: 80%;
-    height: 100%;
-    background-color: rgba(87,124,167,0.0);
-    overflow: scroll;
-    top: 6%;
 
 
-    position: absolute;
-    -ms-transform: translate(115%, 0); /* IE 9 */
-    -webkit-transform: translate(115%, 0); /* Safari */
 
-    transform: translate(115%, 0);
-    transition: transform 0.3s ease;
-    z-index:1;
+
+
+
+
+
+
+/*Sidebar on the left*/
+
+
+.cityBox{
+    background-color: white;
+    border: 5px solid black;
 }
-.border{
-  border: 2px solid black;
+
+.input{
+  float: left;
+  width: 70%;
 }
-.text-left{
-  text-align: left;
+#drawer {
+
+
+     -webkit-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
+-moz-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
+box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
+    overflow: auto;
+    padding: 10px;
+     height: 93%;
+     width: 80%;
+     background-color: rgba(130, 128, 128, 0.7);
+    top: 7%;
+     position: absolute;
+     -ms-transform: translate(-100%, 0); /* IE 9 */
+     -webkit-transform: translate(-100%, 0); /* Safari */
+
+     transform: translate(-100%, 0);
+     transition: transform 0.3s ease;
+     z-index:1;
+
 }
+
+#drawer.open {
+    -ms-transform: translate(0,0); /* IE 9 */
+     -webkit-transform: translate(0,0); /* Safari */
+     transform: translate (0,0);
+}
+
+
+
 #cityBox{
-
-    position: static;
-    height: 100%;
-    background-color:blue;
-    padding-left: 5px;
-
+  position: static;
+  height: 100%;
+  background-color:blue;
+  padding-left: 5px;
 }
-#picture{
-    margin: 5% auto 0 auto;
 
-    background-color: red;
-    height: auto;
 
-    width: 80%;
-    z-index: 0;
+.ajaxList:hover{
+    background-color: #A89DB6;
 }
-#cityInfo.open{
 
-    -ms-transform: translate(25%, 0); /* IE 9 */
-    -webkit-transform: translate(25%, 0); /* Safari */
-    transform: translate (25%, 0);
+.listElement{
+    background-color: white;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius:5px;
 }
+
+.listElement:hover{
+    background-color: #B3BAC1;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /*BURGER-MENU (menu on the left)
 
 the burger-menu-sign*/
 
+
+#headline{
+  height: 7%;
+
+  text-align: center;
+
+}
+
+
+.headline{
+  font-family: 'Shrikhand', cursive;
+  font-size:1.8em;
+
+}
+
 #burger {
   width: 40px; /*60, 45*/
   height: 48px;
-  position: relative;
-  margin: 20px 0 0 0;
+  float: left;
+  margin: 0px 0 0 15px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -238,71 +365,36 @@ the burger-menu-sign*/
 }
 
 
-.ajaxList:hover{
-    background-color: #A89DB6;
-}
-
-.listElement{
-    background-color: white;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    /*padding: 5px 5px 5px 5px;*/
-}
-
-.listElement:hover{
-    background-color: #B3BAC1;
-}
-
-#map {
-    height: 97vh;
-    width: 100%;
-}
-
-#menu{
-    margin-top: 15px;
-}
-
-.cityBox{
-    background-color: white;
-    border: 5px solid black;
-}
-
-#drawer {
-
-
-     -webkit-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
--moz-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
-box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
-
-     height: 100%;
-     background-color: rgba(130, 128, 128, 0.7);
-
-     position: absolute;
-     -ms-transform: translate(-100%, 0); /* IE 9 */
-     -webkit-transform: translate(-100%, 0); /* Safari */
-
-     transform: translate(-100%, 0);
-     transition: transform 0.3s ease;
-     z-index:1;
-
-}
-
-#drawer.open {
-    -ms-transform: translate(0,0); /* IE 9 */
-     -webkit-transform: translate(0,0); /* Safari */
-     transform: translate (0,0);
-}
 
 
 
-/*@media screen and (min-width: 600px){
-     nav {
-          position: relative;
-          transform: translate(0,0);
+
+ /*Mediaqueries*/
+@media screen and (min-width: 750px){
+     .headline{
+      font-size: 50px;
+      margin-top: 5px;
+     }
+     #burger{
+      margin-top: 10px;
+     }
+     #drawer{
+      width: 50%;
+     }
+     .vertical-text{
+      padding-right: 15px;
+      margin-top: 35px;
      }
 
-     body {
-          display: flex;
-          flex-flow: row nowrap;
+
+}
+
+@media screen and (min-width: 1200px){
+  #drawer{
+    width:30%;
+  }
+  .vertical-text{
+      padding-right: 30px;
+      margin-top: 50px;
      }
-}*/
+}
