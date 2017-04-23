@@ -1,4 +1,4 @@
-body, html{
+html{
   /*height: 100%;
   width: 100%;*/
   /*overflow: hidden;*/
@@ -14,8 +14,8 @@ body, html{
 
 /*Main screen*/
 #map {
-    height: 93%;
-    top: 7%;
+    height: calc(100% - 65px);
+    top: 65px;
     position: absolute;
 
 }
@@ -48,8 +48,9 @@ a{
   border: 2px solid black;
 }
 
-.text-left{
+.text-article{
   text-align: left;
+  padding: 10px 0 0 10px;
 }
 
 .text-right{
@@ -68,11 +69,12 @@ a{
 
 /*Sidebar on the right*/
 #cityInfo{
-  height: 93%;
+  height: calc(100% - 65px);
   width: 80%;
   background-color: rgba(87,124,167,0.0);
+  overflow: scroll;
   /*overflow: scroll;*/
-  top: 7%;
+  top: 65px;
   position: absolute;
   -ms-transform: translate(114%, 0); /* IE 9 */
   -webkit-transform: translate(114%, 0); /* Safari */
@@ -100,14 +102,19 @@ a{
 
 .vertical-text{
   /*white-space: nowrap;*/
-  margin:0;
-  padding-right: 0px;
+
+  margin: 0;
+  padding: 0 15px 20px 0;
+  font-size: 3vh;
   color: white;
-  writing-mode: tb-rl;
+  -webkit-writing-mode: vertical-lr;
+  -moz-writing-mode: vertical-lr;
+  -ms-writing-mode: vertical-lr;
+  writing-mode: vertical-lr;
   -ms-transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
-  margin-top: 20px;
+
  /* transform-origin: left center 0;*/
 }
 
@@ -126,6 +133,7 @@ a{
   position: absolute;
   height: 100%;
   width: 90%;
+  overflow: scroll;
 }
 
 .articleBox{
@@ -188,10 +196,10 @@ a{
 box-shadow: 14px 18px 48px -8px rgba(0,0,0,0.75);
     overflow: auto;
     padding: 10px;
-     height: 93%;
+     height: calc(100% - 65px);
      width: 80%;
      background-color: rgba(130, 128, 128, 0.7);
-    top: 7%;
+    top: 65px;
      position: absolute;
      -ms-transform: translate(-100%, 0); /* IE 9 */
      -webkit-transform: translate(-100%, 0); /* Safari */
@@ -250,8 +258,8 @@ the burger-menu-sign*/
 
 
 #headline{
-  height: 7%;
-
+  height: 65px;
+  /*position: relative;*/
   text-align: center;
 
 }
@@ -259,7 +267,9 @@ the burger-menu-sign*/
 
 .headline{
   font-family: 'Shrikhand', cursive;
-  font-size:1.8em;
+  margin:0;
+  padding-top: 18px;
+  font-size: 20px;
 
 }
 
@@ -267,7 +277,7 @@ the burger-menu-sign*/
   width: 40px; /*60, 45*/
   height: 48px;
   float: left;
-  margin: 0px 0 0 15px;
+  margin: 15px 0 0 15px;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
@@ -373,7 +383,7 @@ the burger-menu-sign*/
 @media screen and (min-width: 750px){
      .headline{
       font-size: 50px;
-      margin-top: 5px;
+      padding-top: 5px;
      }
      #burger{
       margin-top: 10px;
@@ -397,4 +407,7 @@ the burger-menu-sign*/
       padding-right: 30px;
       margin-top: 50px;
      }
+  #burger{
+    margin-top: 20px;
+  }
 }

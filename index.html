@@ -45,7 +45,7 @@
             <!-- <img id="picture" src="http://maps.googleapis.com/maps/api/streetview?size=600x300&location=london" alt="London"> -->
             <h4 class="border underlay">NY-Times-articles</h4>
             <div class="articleBox" data-bind="foreach: nytData">
-                <div class="hover text-left text-center">
+                <div class="hover text-article">
                     <a data-bind="attr: {href: web_url}" >
                     <h4 data-bind="text: headline.main"></h4>
                     </a>
@@ -54,7 +54,7 @@
             </div><br>
             <h4 class="border underlay">wikipedia</h4>
             <div class="articleBox" data-bind="foreach: wikiData">
-                <div class="hover text-left text-center">
+                <div class="hover text-article">
                     <a data-bind="attr: {href: url}" >
                     <h4 data-bind="text: title"></h4>
                     </a>
