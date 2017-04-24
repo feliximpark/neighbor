@@ -36,7 +36,7 @@
             <div id="nytimes" class="articleBox" data-bind="foreach: nytData">
                 <div class="hover text-article">
                     <a data-bind="attr: {href: web_url}">
-                        <h4 data-bind="text: headline.main"></h4>
+                        <h4 data-bind="text: viewModel.nytCheck() == false ? 'No connection or no Data from New York Times' : headline.main"></h4>
                     </a>
                     <hr>
                 </div>
@@ -46,7 +46,7 @@
             <div id="wikipedia" class="articleBox" data-bind="foreach: wikiData">
                 <div class="hover text-article">
                     <a data-bind="attr: {href: url}">
-                        <h4 data-bind="text: title"></h4>
+                        <h4 data-bind="text: viewModel.wikiCheck() == false ? 'No connection or no Data from Wikipedia' : title"></h4>
                     </a>
                     <hr>
                 </div>
@@ -72,11 +72,15 @@
         </div>
     </nav>
     <!-- this is the div for displaying the map -->
+    <main>
     <div id="map" data-bind="click: menuOut"></div>
-    <!-- Loading the google maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap"></script>
+
+    </main>
+    <!-- Loading the javascript-files -->
     <script src="script/knockout.js"></script>
     <script src="script/script.js"></script>
+    <!-- Loading the google maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap" onerror="viewModel.googleError()"></script>
 </body>
 
 </html>

@@ -30,10 +30,15 @@ function nyTimes(choosenCity){
     $.getJSON(url, function(data) {
     //if an error orcurs, the fail-function is invoked
     }).fail(function(){
-        console.log("nytimes fails");
-        $("#nytimes").append("<h2>No connection to NYT</h2>");
+        viewModel.nytData.push({web_url:''});
+        viewModel.nytCheck(false);
     })
     .done(function(nytData){
+        // error-handling if there is no content in response
+        if (nytData.response.docs.length < 1) {
+            viewModel.nytData.push({web_url:''});
+            viewModel.nytCheck = false;
+        }
         viewModel.nytData(nytData.response.docs);
     });
 }
@@ -42,31 +47,33 @@ function nyTimes(choosenCity){
 function wikipedia(choosenCity){
     //looking for the strings before the first space, so that wikipedia looks up the city and not any further descriptions like "greater City"
     var wikiCity = choosenCity.split([" "]);
-    var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+wikiCity+"&format=json&callback=wikiCallback";
-    //error-handling: if wikipedia doesn´t answer in 3 sec, an error-message occurs
-    var wikiRequestTimeout = setTimeout(function(){
-    $("#wikipedia").append("<h2>No connection to Wikipedia</h2>");
-    }, 3000);
-// starting the ajax-call for the Wikipedia-API
+    var wikiURL = "http://en.wiikipedia.org/w/api.php?action=opensearch&search="+wikiCity+"&format=json&callback=wikiCallback";
+    // starting the ajax-call for the Wikipedia-API
     $.ajax({
         url: wikiURL,
-        dataType: "jsonp",
-        success: function(response) {
-            var articleList = response[1];
-            var newArray = [];
-            viewModel.wikiData.removeAll();
-            for (var i=0; i<articleList.length; i++) {
-                var articleStr = articleList[i].replace(/ /gi, "_");
-                var newUrl = "http://en.wikipedia.org/wiki/" + articleStr;
-                newArray.title = articleList[i];
-                newArray.url = newUrl;
-                viewModel.wikiData.push(newArray);
-            }
-            clearTimeout(wikiRequestTimeout);
+        dataType: "jsonp"
+    }).done(function(response) {
+        //giving infos, if there is no content in the response
+        if (response[1].length<1){
+            viewModel.wikiCheck(false);
+            viewModel.wikiData.push({url:""});
         }
+        var articleList = response[1];
+        var newArray = [];
+        viewModel.wikiData.removeAll();
+        for (var i=0; i<articleList.length; i++) {
+            var articleStr = articleList[i].replace(/ /gi, "_");
+            var newUrl = "http://en.wikipedia.org/wiki/" + articleStr;
+            newArray.title = articleList[i];
+            newArray.url = newUrl;
+            viewModel.wikiData.push(newArray);
+        }
+    }).fail(function (jqXHR, textStatus){
+        viewModel.wikiCheck(false);
+        viewModel.wikiData.push({url:""});
     });
-    return false;
 }
+
 
 // VIEWMODEL - includes the map-functions and the knockout-observables
 var map;
@@ -137,7 +144,13 @@ var viewModel = {
         //closing the search-menu
         viewModel.menuOut();
     },
-    //opens the right infobar by clikcing the small handler on the right of the screen
+    //ko-observables who are taking the value false, if one of the AJAX-calls fails
+    nytCheck: ko.observable(true),
+    wikiCheck: ko.observable(true),
+    //ko-observable who are taking the value false, if there is no content in the response
+    nytCheckContent: ko.observable(true),
+    wikiCheckContent: ko.observable(true),
+    //opens the right infobar by clicking the small handler on the right of the screen
     cityInfo: function(){
         cityInfo.classList.toggle("open");
         burger.classList.remove("open");
@@ -245,6 +258,9 @@ var viewModel = {
                 new google.maps.Size(21,34));
             return markerImage;
         }
+    },
+    googleError: function(){
+        console.log("Google Error");
     }
 };
 //subscribing for the search-function
