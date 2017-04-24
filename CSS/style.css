@@ -1,14 +1,12 @@
-html{
-  /*height: 100%;
-  width: 100%;*/
+html {
   overflow: hidden;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: "Arial", "Helvetica", sans-serif;
 }
 
-
-/*Main screen*/
+/*Map positioning*/
 #map {
     height: calc(100% - 65px);
     width: 100%;
@@ -17,39 +15,29 @@ html{
 }
 
 /*General styles*/
-.padding{
+.padding {
   margin: 5px;
 }
 
-.hover:hover{
+.hover:hover {
   background-color: white;
   border-radius: 20px;
 }
 
-a{
+a {
   color: black;
 }
 
-.border{
+.border {
   border: 2px solid black;
 }
 
-.text-right{
+.text-right {
   float: right;
 }
 
-
-
-
-
-
-
-
-
-
-
 /*Sidebar on the right*/
-#cityInfo{
+#cityInfo {
   height: calc(100% - 65px);
   width: 80%;
   background-color: rgba(87,124,167,0.0);
@@ -64,14 +52,14 @@ a{
   z-index:1;
 }
 
-#cityInfo.open{
+#cityInfo.open {
   -ms-transform: translate(25%, 0); /* IE 9 */
   -webkit-transform: translate(25%, 0); /* Safari */
   transform: translate(25%, 0);
 }
 
-#smallHandler{
-  background-color: #23538A;
+#smallHandler {
+  background-color: #23538a;
   height: 45%;
   width: 12%;
   position: absolute;
@@ -81,9 +69,7 @@ a{
 
 }
 
-.vertical-text{
-  /*white-space: nowrap;*/
-
+.vertical-text {
   margin: 0;
   padding: 0 15px 20px 0;
   font-size: 3vh;
@@ -95,11 +81,9 @@ a{
   -ms-transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
-
- /* transform-origin: left center 0;*/
 }
 
-#infoBar{
+#infoBar {
   -webkit-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
   box-shadow: -12px 18px 48px -8px rgba(0,0,0,0.75);
@@ -117,44 +101,44 @@ a{
   overflow: scroll;
 }
 
-.articleBox{
+.articleBox {
   height: 30%;
   overflow: auto;
   border-radius: 50px;
   padding: 7px;
-  background-color: #A3CCFF;
+  background-color: #a3ccff;
 }
 
-.underlay{
+.underlay {
   background-color: white;
   border: 2px solid black;
   border-radius: 20px;
   padding: 5px;
 }
 
-#picture{
+#picture {
     margin: 5% auto 0 auto;
     height: auto;
     width: 80%;
     z-index: 1;
 }
 
-.text-center{
+.text-center {
   padding: 10px 5px 0 5px;
 }
 
-.text-article{
+.text-article {
   text-align: left;
   padding: 10px 0 0 10px;
 }
 
 /*Sidebar on the left*/
-.cityBox{
+.cityBox {
     background-color: white;
     border: 5px solid black;
 }
 
-.input{
+.input {
   float: left;
   width: 70%;
 }
@@ -183,39 +167,39 @@ a{
      transform: translate (0,0);
 }
 
-#cityBox{
+#cityBox {
   position: static;
   height: 100%;
   background-color:blue;
   padding-left: 5px;
 }
 
-.ajaxList:hover{
-    background-color: #A89DB6;
+.ajaxList:hover {
+    background-color: #a89db6;
 }
 
-.listElement{
+.listElement {
     background-color: white;
     padding: 5px;
     margin-bottom: 5px;
     border-radius:5px;
 }
 
-.listElement:hover{
-    background-color: #B3BAC1;
+.listElement:hover {
+    background-color: #b3bac1;
 }
 
 /*BURGER-MENU (menu on the left)
 the burger-menu-sign*/
-#headline{
+#headline {
   height: 65px;
   text-align: center;
 }
 
-.headline{
+.headline {
   font-family: 'Shrikhand', cursive;
   margin:0;
-  padding-top: 18px;
+  padding: 10px 0 10px 0;
   font-size: 20px;
 }
 
@@ -262,26 +246,31 @@ the burger-menu-sign*/
   border-radius: 4px 0 0 4px;
 }
 
-#burger span:nth-child(1), #burger span:nth-child(2) {
+#burger span:nth-child(1),
+#burger span:nth-child(2) {
   top: 0px;
 }
 
-#burger span:nth-child(3), #burger span:nth-child(4) {
+#burger span:nth-child(3),
+#burger span:nth-child(4) {
   top: 12px;
 }
 
-#burger span:nth-child(5), #burger span:nth-child(6) {
+#burger span:nth-child(5),
+#burger span:nth-child(6) {
   top: 24px;
 }
 
-#burger.open span:nth-child(1),#burger.open span:nth-child(6) {
+#burger.open span:nth-child(1),
+#burger.open span:nth-child(6) {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
-#burger.open span:nth-child(2),#burger.open span:nth-child(5) {
+#burger.open span:nth-child(2),
+#burger.open span:nth-child(5) {
   -webkit-transform: rotate(-45deg);
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
@@ -321,8 +310,8 @@ the burger-menu-sign*/
  /*Mediaqueries*/
 @media screen and (min-width: 750px){
   .headline{
-  font-size: 50px;
-  padding-top: 5px;
+  font-size: 40px;
+  padding: 0px 0 15px 0;
   }
   #burger{
   margin-top: 10px;
@@ -346,5 +335,9 @@ the burger-menu-sign*/
   }
   #burger{
     margin-top: 20px;
+  }
+  .headline{
+  font-size: 45px;
+  padding: 0px 0 15px 0;
   }
 }

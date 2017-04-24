@@ -5,15 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eurocity-App by Knoop</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body>
-
-
     <header id="headline">
         <div id="burger" data-bind="click: burgerMenu">
             <span></span>
@@ -25,30 +22,30 @@
         </div>
         <h3 class="headline">Euro-City-Finder</h3>
     </header>
-
     <!-- The right sidebar with the infos from the ajax-calls -->
     <aside id="cityInfo">
         <!-- the div-section for the handler on the left of the infobar
         this handler we can click for showing the right sidebar -->
-        <div id="smallHandler" data-bind="click: cityInfo" >
+        <div id="smallHandler" data-bind="click: cityInfo">
             <h2 class="vertical-text">CITY-INFOS</h2>
         </div>
-
         <article id="infoBar">
-            <h2 class="border underlay" data-bind="text: selectedCity"></h2><br>
+            <h2 class="border underlay" data-bind="text: selectedCity"></h2>
+            <br>
             <h4 class="border underlay">NY-Times-articles</h4>
             <div class="articleBox" data-bind="foreach: nytData">
                 <div class="hover text-article">
-                    <a data-bind="attr: {href: web_url}" >
+                    <a data-bind="attr: {href: web_url}">
                         <h4 data-bind="text: headline.main"></h4>
                     </a>
                     <hr>
                 </div>
-            </div><br>
+            </div>
+            <br>
             <h4 class="border underlay">wikipedia</h4>
-            <div class="articleBox" data-bind="foreach: wikiData">
+            <div id="wikipedia" class="articleBox" data-bind="foreach: wikiData">
                 <div class="hover text-article">
-                    <a data-bind="attr: {href: url}" >
+                    <a data-bind="attr: {href: url}">
                         <h4 data-bind="text: title"></h4>
                     </a>
                     <hr>
@@ -56,32 +53,30 @@
             </div>
         </article>
     </aside>
-
     <!-- Left sidebar -->
     <!-- This is the burger menu (hidden until the burger is clicked) -->
     <nav id="drawer">
         <form data-bind="submit: zoomToCityTextInput">
-            <input class ="input underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
+            <input class="input underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
             <button class="underlay padding" type="button" data-bind="click: zoomToCityTextInput">OK</button>
         </form>
         <br>
         <div class="cities" data-bind="foreach: cityArray">
             <div class="listElement" data-bind="click: $parent.zoomToCity">
                 <strong data-bind="text: city"></strong>
-                <strong class="text-right">Pop.</strong><br>
+                <strong class="text-right">Pop.</strong>
+                <br>
                 <span data-bind="text: country"></span>
                 <span class="text-right" data-bind="text: population"></span>
             </div>
         </div>
     </nav>
-
     <!-- this is the div for displaying the map -->
     <div id="map" data-bind="click: menuOut"></div>
-
-<!-- Loading the google maps API -->
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap"></script>
-<script src="script/knockout.js"></script>
-<script src="script/script.js"></script>
+    <!-- Loading the google maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap"></script>
+    <script src="script/knockout.js"></script>
+    <script src="script/script.js"></script>
 </body>
 
 </html>
