@@ -33,7 +33,7 @@
             <h2 class="border underlay" data-bind="text: selectedCity"></h2>
             <br>
             <h4 class="border underlay">NY-Times-articles</h4>
-            <div class="articleBox" data-bind="foreach: nytData">
+            <div id="nytimes" class="articleBox" data-bind="foreach: nytData">
                 <div class="hover text-article">
                     <a data-bind="attr: {href: web_url}">
                         <h4 data-bind="text: headline.main"></h4>

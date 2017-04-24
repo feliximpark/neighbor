@@ -30,7 +30,8 @@ function nyTimes(choosenCity){
     $.getJSON(url, function(data) {
     //if an error orcurs, the fail-function is invoked
     }).fail(function(){
-        viewModel.nytData("No connection to NYT");
+        console.log("nytimes fails");
+        $("#nytimes").append("<h2>No connection to NYT</h2>");
     })
     .done(function(nytData){
         viewModel.nytData(nytData.response.docs);
@@ -149,6 +150,7 @@ var viewModel = {
         zoom: 4
         });
         viewModel.setMarker("DROP");
+        console.log(map);
     },
     setMarker: function(animeStyle){
         //creating a variable with the length of the actual
