@@ -8,10 +8,9 @@ var cities=[{city:"Istanbul",population:9897599,country:"Turkey",class:6,country
 
 
 // Creating an Array with all names for the autocomplete
-// TO DO: ein Array clonen, nicht nur auf das Original verweisen,
-// denn das Original wird durch observable verändert.
+
 var cityList = [];
-var map;
+
 function createCityList(){
     for (var i=0; i<cities.length; i++){
         cities[i].label = cities[i].city;
@@ -39,23 +38,14 @@ function nyTimes(choosenCity){
     });
 
     $.getJSON(url, function(data) {
-
+    //if an error orcurs, the fail-function is invoked
     }).fail(function(){
-
-        console.log("Couldn´t load the article");
+        viewModel.nytData("No connection to NYT");
     })
-
     .done(function(nytData){
-         console.log("done meldet: alles hat geklappt");
-         console.log(nytData);
-         viewModel.nytData(nytData.response.docs);
+        viewModel.nytData(nytData.response.docs);
     });
-
 }
-
-
-
-
 
 // Ajax-call for Wikipedia
 function wikipedia(choosenCity){
@@ -63,14 +53,12 @@ function wikipedia(choosenCity){
     var wikiCity = choosenCity.split([" "]);
     console.log(wikiCity);
     var wikiURL = "http://en.wikipedia.org/w/api.php?action=opensearch&search="+wikiCity+"&format=json&callback=wikiCallback";
-
 //jsonp hat keine .false-Methode, die müssen wir uns selbst bauen
 //folgender Trick: Wir schreiben eine setTimeout-Function, eine Art Zeitzünder
 // wir schalten den Zeitzünder im Ajax-Request ab, wenn Success vermeldet wird
 var wikiRequestTimeout = setTimeout(function(){
-    console.log("failed to get wikipedia resources");
+    viewModel.wikiData.push("No connection to Wikipedia");
 }, 8000);
-
 //Hier starten wir den Ajax-Call und geben ein paar Settings mit auf den Weg,
 // die Wikipedia für die Bearbeitung benötigt.
 $.ajax({
@@ -117,17 +105,11 @@ $.ajax({
 
 
 
-function streetView(choosenCity){
-    var address = choosenCity;
-    var streetViewUrl = "http://maps.googleapis.com/maps/api/streetview?size=600x300&location=" + address;
-    viewModel.cityPicture(streetViewUrl);
-
-}
 
 
 
 // VIEWMODEL - knockout
-
+var map;
 var mapShow;
 var markers = [];
 var viewModel = {

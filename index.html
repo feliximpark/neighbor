@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neigborhood Knoop+-</title>
+    <title>Eurocity-App by Knoop</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet">
     <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,40 +14,33 @@
 <body>
 
 
- <header id="headline">
-
-            <div id="burger" data-bind="click: burgerMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-
+    <header id="headline">
+        <div id="burger" data-bind="click: burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <h3 class="headline">Euro-City-Finder</h3>
     </header>
 
-
     <!-- The right sidebar with the infos from the ajax-calls -->
-
     <aside id="cityInfo">
         <!-- the div-section for the handler on the left of the infobar
         this handler we can click for showing the right sidebar -->
         <div id="smallHandler" data-bind="click: cityInfo" >
-            <h2 class="vertical-text">MORE CITY-INFOS</h2>
+            <h2 class="vertical-text">CITY-INFOS</h2>
         </div>
 
         <article id="infoBar">
             <h2 class="border underlay" data-bind="text: selectedCity"></h2><br>
-            <!-- <img id="picture" data-bind="attr: {src:cityPicture}" alt="Picture of the choosen City"> -->
-            <!-- <img id="picture" src="http://maps.googleapis.com/maps/api/streetview?size=600x300&location=london" alt="London"> -->
             <h4 class="border underlay">NY-Times-articles</h4>
             <div class="articleBox" data-bind="foreach: nytData">
                 <div class="hover text-article">
                     <a data-bind="attr: {href: web_url}" >
-                    <h4 data-bind="text: headline.main"></h4>
+                        <h4 data-bind="text: headline.main"></h4>
                     </a>
                     <hr>
                 </div>
@@ -56,31 +49,16 @@
             <div class="articleBox" data-bind="foreach: wikiData">
                 <div class="hover text-article">
                     <a data-bind="attr: {href: url}" >
-                    <h4 data-bind="text: title"></h4>
+                        <h4 data-bind="text: title"></h4>
                     </a>
                     <hr>
                 </div>
             </div>
-
         </article>
     </aside>
 
-
-
-
-
-
-    <!-- This is the burger menu (hidden until the burger is clicked) -->
-
-    <!-- hamburger icon  -->
-
-
-
-
-
-
-
     <!-- Left sidebar -->
+    <!-- This is the burger menu (hidden until the burger is clicked) -->
     <nav id="drawer">
         <form data-bind="submit: zoomToCityTextInput">
             <input class ="input underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
@@ -97,29 +75,13 @@
         </div>
     </nav>
 
-
-
-
-
     <!-- this is the div for displaying the map -->
-    <main>
-    <div id="map" class="col-xs-12" data-bind="click: menuOut">
-    <!-- <div id="map" class="main" data-bind="click: menuOut"> -->
-    </div>
-    </main>
-
-
-
-
+    <div id="map" data-bind="click: menuOut"></div>
 
 <!-- Loading the google maps API -->
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap"></script>
-
-
-
 <script src="script/knockout.js"></script>
 <script src="script/script.js"></script>
-
-
 </body>
+
 </html>
