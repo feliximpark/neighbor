@@ -12,7 +12,7 @@
 
 <body>
     <header id="headline">
-        <div id="burger" data-bind="click: burgerMenu">
+        <div id="burger" data-bind="click: burgerMenu, css : { open: burgerStyle() == true}">
             <span></span>
             <span></span>
             <span></span>
@@ -20,10 +20,10 @@
             <span></span>
             <span></span>
         </div>
-        <h3 class="headline">Euro-City-Finder</h3>
+        <h3 class="headline" data-bind="click: backToBeginning">Euro-City-Finder</h3>
     </header>
     <!-- The right sidebar with the infos from the ajax-calls -->
-    <aside id="cityInfo">
+    <aside id="cityInfo" data-bind="css : { open: cityInfoStyle() == true}">
         <!-- the div-section for the handler on the left of the infobar
         this handler we can click for showing the right sidebar -->
         <div id="smallHandler" data-bind="click: cityInfo">
@@ -55,31 +55,35 @@
     </aside>
     <!-- Left sidebar -->
     <!-- This is the burger menu (hidden until the burger is clicked) -->
-    <nav id="drawer">
+    <nav id="drawer" data-bind="css : { open: burgerStyle() == true}">
         <form data-bind="submit: zoomToCityTextInput">
             <input class="input underlay padding" type="search" id="q" placeholder="Stadt eingeben" data-bind="value: query, valueUpdate: 'keyup'" />
             <button class="underlay padding" type="button" data-bind="click: zoomToCityTextInput">OK</button>
         </form>
         <br>
         <div class="cities" data-bind="foreach: cityArray">
-            <div class="listElement" data-bind="click: $parent.zoomToCity">
-                <strong data-bind="text: city"></strong>
-                <strong class="text-right">Pop.</strong>
-                <br>
-                <span data-bind="text: country"></span>
-                <span class="text-right" data-bind="text: population"></span>
+            <div data-bind="if: control">
+                <div class="listElement" data-bind=" click: $parent.zoomToCity, event: {mouseover: $parent.activateMarker, mouseout: $parent.deactivateMarker}">
+                    <strong data-bind="text: city"></strong>
+                    <strong class="text-right">Pop.</strong>
+                    <br>
+                    <span data-bind="text: country"></span>
+                    <span class="if: markers.control, text-right" data-bind="text: population"></span>
+                </div>
             </div>
         </div>
     </nav>
     <!-- this is the div for displaying the map -->
     <main>
     <div id="map" data-bind="click: menuOut"></div>
-
+    <div data-bind="if: googleStatus">
+        <h1 data-bind="text: googleAlert"></h1>
+    </div>
     </main>
     <!-- Loading the javascript-files -->
     <script src="script/knockout.js"></script>
     <script src="script/script.js"></script>
-    <!-- Loading the google maps API -->
+    <!-- Loading the google maps API asynchronly-->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQtFEI8IB7P_dEbyhu9_PYO76Nebq8qUY&v=3&libraries=places,drawing,geometry&callback=viewModel.initMap" onerror="viewModel.googleError()"></script>
 </body>
 
